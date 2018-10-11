@@ -1,0 +1,20 @@
+sudo: required
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: build
+      script:
+        - docker build -t $DOCKER_USERNAME/docker-openstack-ansible-client .
+    - stage: deploy
+      script:
+        - docker build -t $DOCKER_USERNAME/docker-openstack-ansible-client .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push snieking/docker-openstack-ansible-client
+      
+stages:
+  - name: build
+  - name: deploy
+    if: branch = master
