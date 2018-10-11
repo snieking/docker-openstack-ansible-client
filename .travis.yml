@@ -5,9 +5,11 @@ services:
 
 jobs:
   include:
-    - stage: build
+    - stage: build & test
       script:
         - docker build -t $DOCKER_USERNAME/docker-openstack-ansible-client .
+        - ansible_installed_test = echo "ansible --version" | docker run -i $DOCKER_USERNAME/docker-openstack-ansible-client
+        - if [[ $ansible_installed_test =~ .*command not found.* ]]; then exit 1; else exit 0; fi
       
 stages:
-  - name: build
+  - name: build & test
