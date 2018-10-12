@@ -21,9 +21,9 @@ Create an alias for running the container so that you can start the container wi
 
 *~/.bashrc* 
 ```
-alias os-ansible-cli=docker run -it \
+alias os-ansible-cli='docker run -it \
   -v ${HOME}/.config/openstack:/etc/openstack \
   -v ${HOME}/.ssh:/home/docker/.ssh \
   -v ${HOME}/ansible:/home/docker/ansible \
-  snieking/docker-openstack-ansible-client
+  snieking/docker-openstack-ansible-client'
 ```
